@@ -1,8 +1,18 @@
 # Tech Store
 
-**PUBLIC publication status: NOT READY (2026-11-09).** A final review on 2026-11-09 found unverified non-placeholder contact data in php/email.php:115-116 (email, telephone and street address). Values are intentionally withheld. Replace them with demonstration placeholders or explicitly establish that they are intended public business details before publication. Application source was left unchanged for this review.
+A PHP and MySQL storefront demo that takes shoppers from product browsing to a Cash on Delivery order confirmation. An administrator workspace supports catalog and order management.
 
-A PHP/MySQL storefront showcasing product browsing, product details, a local shopping cart, checkout, customer order history and administrator product/order management.
+## Features
+
+- Product catalog, product details, and a browser shopping cart.
+- Customer registration, sign-in, and order history.
+- Cash on Delivery checkout with server-calculated totals and stock checks.
+- Order confirmation with retry protection and customer-scoped receipt access.
+- Administrator tools for products, users, and order status.
+
+## Technology
+
+PHP with PDO, MySQL, HTML, CSS, and JavaScript. Checkout uses database transactions; no external payment API is required.
 
 ## Requirements
 
@@ -42,8 +52,8 @@ Both form and JSON checkout require a CSRF token and a session/account-bound che
 
 ## Security and testing
 
-CSRF tokens protect form/API changes, session IDs regenerate on login, protected requests recheck account status/role, and login attempts are throttled. Checkout derives prices and stock from the database. Cancellation/reopening adjusts stock transactionally. Order details require ownership or administrator access; guest receipts require the originating session. Dynamic product/cart/order text is escaped before HTML insertion. Most interface contacts use demonstration placeholders, but the order-email footer still contains the unverified contact block described above.
+CSRF tokens protect form/API changes, session IDs regenerate on login, protected requests recheck account status/role, and login attempts are throttled. Checkout derives prices and stock from the database. Cancellation/reopening adjusts stock transactionally. Order details require ownership or administrator access; guest receipts require the originating session. Dynamic product/cart/order text is escaped before HTML insertion. The order-email footer contains fictional contact information included for demonstration.
 
 The checkout revision passed 40 HTTP/database checks and 17 checkout DOM-emulation checks. The existing 56 HTTP/security/path/JSON and 28 DOM checks were also rerun successfully, plus four fresh-schema checks. CLI administrator provisioning passed in the earlier review. The public demonstration coupon is DEMO20. DOM emulation does not verify a real browser's rendering, responsive layout or every pointer/keyboard interaction. Live mail and production deployment were not tested. Apache configuration was reviewed but not run; if using Apache 2.4, enable the supplied .htaccess rules and mod_rewrite. It fails closed without the rewrite module. Keep databases, test storage and private files outside public access.
 
-The intended repository is PUBLIC `tech-store`, subject to explicit publication approval. PUBLIC_RELEASE_SECURITY_REPORT.md records the review, limitations and rotation guidance. COMMIT_FILES.txt lists every proposed publication file. No GitHub repository has been created or uploaded.
+See the [security review](PUBLIC_RELEASE_SECURITY_REPORT.md) for release scope and limitations and the [file inventory](COMMIT_FILES.txt) for the reviewed release contents.
