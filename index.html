@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>tech store - Informatique de qualité, prix imbattables</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha384-iw3OoTErCYJJB9mCa8LNS2hbsQ7M3C0EpIsO/H5+EGAkPGc6rk+V8i04oW/K5xq0" crossorigin="anonymous">
+</head>
+<body>
+    <!-- Header -->
+    <header class="main-header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <a href="index.html"><span class="tech">tech</span> <span class="store">store</span></a>
+                </div>
+                
+                <nav class="main-nav">
+                    <ul>
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="informatique.html">informatique</a></li>
+                        <li class="dropdown">
+                            <a href="ordinateurs.html">Ordinateurs <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="ordinateurs-bureau.html">Ordinateurs de Bureau</a></li>
+                                <li><a href="ordinateurs-portable.html">Ordinateurs portable</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="peripheriques-accessoires.html">Périphériques & Accessoires <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="peripherique-pc.html">Périphérique PC</a></li>
+                                <li><a href="accessoires-pc-portable.html">Accessoires PC Portable</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="contact.html">contact</a></li>
+                    </ul>
+                </nav>
+
+                <div class="header-icons">
+                    <a href="wishlist.html" class="icon-link"><i class="far fa-heart"></i><span class="badge">2</span></a>
+                    <button class="icon-link search-icon" type="button"><i class="fas fa-search"></i></button>
+
+                    <a href="login.html" class="icon-link" id="loginLink"><i class="far fa-user"></i></a>
+                    <a href="cart.html" class="icon-link"><i class="fas fa-shopping-cart"></i><span class="badge">0</span></a>
+                    <a href="#" class="icon-link close-search" id="closeSearch" style="display: none;"><i class="fas fa-times"></i></a>
+
+                    <!-- Search container inside header-icons -->
+                    <div class="search-container" id="searchContainer" style="display: none;">
+                        <div class="search-input-wrapper">
+                            <input type="text" class="search-input" id="searchInput" placeholder="Rechercher des produits...">
+                            <button class="search-btn" id="searchBtn"><i class="fas fa-search"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="mobile-menu-toggle">
+                    <i class="fas fa-bars" ></i>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>Informatique de qualité,<br>prix imbattables</h1>
+                    <a href="informatique.html"><button class="btn-primary">acheter maintenant</button></a>
+                </div>
+                <div class="hero-image">
+                     <img src="img/header.png" alt="hed" class="hero-img"> 
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section">
+        <div class="container">
+            <div class="features-grid">
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-truck"></i>
+                    </div>
+                    <div class="feature-text">
+                        <h3>Livraison gratuite</h3>
+                        <p>Livraison partout en tunisie</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <div class="feature-text">
+                        <h3>Garantie de qualité</h3>
+                        <p>Achetez en toute confiance</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-phone-alt"></i>
+                    </div>
+                    <div class="feature-text">
+                        <h3>Appelez-nous</h3>
+                        <p>+216 72 689 689</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="categories-section">
+        <div class="container">
+            <h2 class="section-title">Categories</h2>
+            <div class="categories-grid">
+                <a href="ordinateurs.html" class="category-card category-dark">
+                    <div class="category-content ordi">
+                        <h3>Ordinateurs</h3>
+                    </div>
+                </a>
+                <a href="peripheriques-accessoires.html" class="category-card category-light">
+                    <div class="category-content catego">
+                        <h3>Périphériques & Accessoires</h3>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Best Sellers Section -->
+    <section class="products-section">
+        <div class="container">
+            <h2 class="section-title">Articles les plus vendu</h2>
+            <div class="products-grid" id="bestSellers">
+                <!-- Products will be loaded via JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Promotion Banner -->
+    <section class="promo-banner">
+        <div class="container">
+            <div class="promo-content">
+                <div class="promo-image">
+                    <!-- Apple products image -->
+                </div>
+                <div class="promo-text">
+                    <h2>20% DE RÉDUCTION<br>SUR LA<br>COLLECTION APPLE</h2>
+                    
+                    <a href="http://localhost/tech_store/product-single.html?id=12"><button class="btn-promo">acheter maintenant</button></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Promotional Products Section -->
+    <section class="products-section">
+        <div class="container">
+            <h2 class="section-title">Articles en promotion</h2>
+            <div class="products-grid" id="promoProducts">
+                <!-- Products will be loaded via JS -->
+            </div>
+        </div>
+    </section>
+    <!-- Search Page -->
+        <div class="search-page" id="searchPage" style="display: none;">
+            <div class="container">
+                <!-- No Results Message -->
+                <div class="no-results" id="noResults" style="display: none;">
+                    <i class="fas fa-laptop"></i>
+                    <span>No products were found matching your selection.</span>
+                </div>
+
+                <!-- Search Results Header -->
+                <div class="search-results-header" id="resultsHeader" style="display: none;">
+                    <div class="results-count" id="resultsCount">Showing all results</div>
+                    <select class="sort-select">
+                        <option>Relevance</option>
+                        <option>Prix croissant</option>
+                        <option>Prix décroissant</option>
+                    </select>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 280px 1fr; gap: 30px;">
+                    <!-- Sidebar -->
+                    <aside class="search-sidebar">
+                        <div class="search-filter">
+                            <h3>marques</h3>
+                            <div class="brand-checkbox">
+                                <input type="checkbox" id="logitech" value="LogiTech">
+                                <label for="logitech">LogiTech</label>
+                            </div>
+                            <div class="brand-checkbox">
+                                <input type="checkbox" id="apple" value="Apple">
+                                <label for="apple">Apple</label>
+                            </div>
+                            <button class="apply-filter-btn" id="applyFilter">Apply filter</button>
+                        </div>
+
+                        <div class="search-filter" style="margin-top: 30px;">
+                            <h3>catégories de produits</h3>
+                            <ul class="categories-list">
+                                <li class="category-parent">informatique</li>
+                                <li class="category-child"><a href="#">Ordinateurs</a></li>
+                                <li class="category-child"><a href="#">Ordinateurs de Bureau</a></li>
+                                <li class="category-child"><a href="#">Ordinateurs portable</a></li>
+                                <li class="category-child"><a href="#">Périphériques & Accessoires</a></li>
+                                <li class="category-child"><a href="#">Accessoires PC Portable</a></li>
+                                <li class="category-child"><a href="#">Périphérique PC</a></li>
+                                <li class="category-child"><a href="#">Clavier</a></li>
+                                <li class="category-child"><a href="#">Écran</a></li>
+                                <li class="category-child"><a href="#">Micro-Casque</a></li>
+                                <li class="category-child"><a href="#">Souris & tapis de souris</a></li>
+                                <li class="category-child"><a href="#">WebCam & StreamCam</a></li>
+                            </ul>
+                        </div>
+                    </aside>
+
+                    <!-- Results Grid -->
+                    <div class="products-grid" id="searchResults"></div>
+                </div>
+            </div>
+        </div>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <span class="tech">tech</span> <span class="store">store</span>
+                    </div>
+                    <p>Votre destination pour les ordinateurs, périphériques et accessoires au meilleur rapport qualité-prix.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Liens</h4>
+                    <ul>
+                        <li><a href="index.html">accueil</a></li>
+                        <li><a href="peripheriques-accessoires.html">Périphériques & Accessoires</a></li>
+                        <li><a href="ordinateurs.html">ordinateur</a></li>
+                        <li><a href="contact.html">contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Suivez-nous</h4>
+                    <ul class="social-links">
+                        <li><a href="#"><i class="fab fa-facebook"></i> Facebook</a></li>
+                        <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
+                        <li><a href="#"><i class="fab fa-tiktok"></i> TikTok</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact</h4>
+                    <p><strong>Adresse:</strong> À configurer pour votre démonstration</p>
+                    <p><strong>Horaires :</strong> Du lundi au vendredi de 9h00 à 17h00</p>
+                    <p><strong>Téléphone:</strong> À configurer</p>
+                    <p><strong>Email:</strong> contact@example.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/security.js"></script>
+<script src="js/products.js"></script>
+<script src="js/cart.js"></script>
+<script src="js/main.js"></script>
+<script src="js/session.js"></script>
+</body>
+</html>

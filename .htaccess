@@ -1,0 +1,12 @@
+Options -Indexes
+<IfModule !mod_rewrite.c>
+Require all denied
+</IfModule>
+<FilesMatch "(?i)(^\.|\.(sql|log|ini|json|key|pem)$)">
+Require all denied
+</FilesMatch>
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteRule (^|/)\. - [F]
+RewriteRule \.(sql|log|ini)$ - [F,NC]
+</IfModule>

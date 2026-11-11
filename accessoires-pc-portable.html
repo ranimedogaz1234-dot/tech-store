@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accessoires PC Portable - tech store</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/shop.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha384-iw3OoTErCYJJB9mCa8LNS2hbsQ7M3C0EpIsO/H5+EGAkPGc6rk+V8i04oW/K5xq0" crossorigin="anonymous">
+</head>
+<body>
+    <!-- Header -->
+    <header class="main-header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <a href="index.html"><span class="tech">tech</span> <span class="store">store</span></a>
+                </div>
+                
+                <nav class="main-nav">
+                    <ul>
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="informatique.html">informatique</a></li>
+                        <li class="dropdown">
+                            <a href="ordinateurs.html">Ordinateurs <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="ordinateurs-bureau.html">Ordinateurs de Bureau</a></li>
+                                <li><a href="ordinateurs-portable.html">Ordinateurs portable</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="peripheriques-accessoires.html" class="active">Périphériques & Accessoires <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="peripherique-pc.html">Périphérique PC</a></li>
+                                <li><a href="accessoires-pc-portable.html">Accessoires PC Portable</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="contact.html">contact</a></li>
+                    </ul>
+                </nav>
+
+                <div class="header-icons">
+                    <a href="wishlist.html" class="icon-link"><i class="far fa-heart"></i><span class="badge">2</span></a>
+                    <a href="#" class="icon-link search-icon"><i class="fas fa-search"></i></a>
+                    <a href="login.html" class="icon-link"><i class="far fa-user"></i></a>
+                    <a href="cart.html" class="icon-link"><i class="fas fa-shopping-cart"></i><span class="badge">0</span></a>
+                </div>
+
+                <div class="mobile-menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Accessoires PC Portable</h1>
+            <div class="breadcrumb">
+                <a href="index.html">Accueil</a> / <a href="informatique.html">informatique</a> / <a href="peripheriques-accessoires.html">Périphériques & Accessoires</a> / <span>Accessoires PC Portable</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Shop Section -->
+    <section class="shop-section">
+        <div class="container">
+            <div class="shop-layout">
+                <!-- Sidebar -->
+                <aside class="shop-sidebar">
+                    <!-- Search Widget -->
+                    <div class="sidebar-widget">
+                        <div class="search-widget">
+                            <input type="text" placeholder="Search products..." id="sidebarSearch">
+                            <button onclick="searchProducts()" ><i class="fas fa-search"></i></button>
+                        </div>
+                    </div>
+
+                    <!-- Price Filter -->
+                    <div class="sidebar-widget">
+                        <h3>Filtre par le prix</h3>
+                        <div class="price-filter">
+                            <div class="price-slider">
+                                <input type="range" id="minPrice" min="0" max="500000" value="0" step="10000">
+                                <input type="range" id="maxPrice" min="0" max="500000" value="500000" step="10000">
+                            </div>
+                            <div class="price-inputs">
+                                <span>Price: <span id="minPriceDisplay">0</span>د.ت — <span id="maxPriceDisplay">500,000</span>د.ت</span>
+                            </div>
+                            <button class="btn-filter" onclick="applyPriceFilter()">Filter</button>
+                        </div>
+                    </div>
+
+                    <!-- Brands Filter -->
+                    <div class="sidebar-widget">
+                        <h3>marques</h3>
+                        <div class="filter-list">
+                            <label class="filter-option">
+                                <input type="checkbox" name="brand" value="BANGE" onchange="applyFilters()">
+                                <span>BANGE</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" name="brand" value="Targus" onchange="applyFilters()">
+                                <span>Targus</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" name="brand" value="HP" onchange="applyFilters()">
+                                <span>HP</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" name="brand" value="Dell" onchange="applyFilters()">
+                                <span>Dell</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" name="brand" value="Lenovo" onchange="applyFilters()">
+                                <span>Lenovo</span>
+                            </label>
+                        </div>
+                        <button class="btn-filter-apply" onclick="applyFilters()">Apply filter</button>
+                    </div>
+
+                    <!-- Categories Filter -->
+                    <div class="sidebar-widget">
+                        <h3>catégories de produits</h3>
+                        <div class="categories-tree">
+                            <div class="category-item">
+                                <a href="informatique.html">informatique</a>
+                            </div>
+                            <div class="category-item has-children">
+                                <a href="ordinateurs.html">Ordinateurs</a>
+                                <ul class="sub-categories">
+                                    <li><a href="ordinateurs-bureau.html">Ordinateurs de Bureau</a></li>
+                                    <li><a href="ordinateurs-portable.html">Ordinateurs portable</a></li>
+                                </ul>
+                            </div>
+                            <div class="category-item has-children">
+                                <a href="peripheriques-accessoires.html">Périphériques & Accessoires</a>
+                                <ul class="sub-categories">
+                                    <li><a href="accessoires-pc-portable.html" class="active">Accessoires PC Portable</a></li>
+                                    <li><a href="peripherique-pc.html">Périphérique PC</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </aside>
+
+                <!-- Main Content -->
+                <main class="shop-content">
+                    <!-- Toolbar -->
+                    <div class="shop-toolbar">
+                        <div class="results-count">
+                            Showing <span id="resultsCount">1–9</span> of <span id="totalCount">18</span> results
+                        </div>
+                        <div class="shop-sorting">
+                            <select id="sortProducts" onchange="sortProducts()">
+                                <option value="default">Default sorting</option>
+                                <option value="popularity">Sort by popularity</option>
+                                <option value="rating">Sort by average rating</option>
+                                <option value="latest">Sort by latest</option>
+                                <option value="price-low">Sort by price: low to high</option>
+                                <option value="price-high">Sort by price: high to low</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Products Grid -->
+                    <div class="products-grid" id="productsGrid">
+                        <!-- Products will be loaded via JavaScript -->
+                    </div>
+
+                    <!-- Pagination -->
+                    <div class="pagination">
+                        <button class="page-btn active" onclick="changePage(1)">1</button>
+                        <button class="page-btn" onclick="changePage(2)">2</button>
+                        <button class="page-btn next" onclick="nextPage()">NEXT</button>
+                    </div>
+                </main>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <span class="tech">tech</span> <span class="store">store</span>
+                    </div>
+                    <p>Votre destination pour les ordinateurs, périphériques et accessoires au meilleur rapport qualité-prix.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Liens</h4>
+                    <ul>
+                        <li><a href="index.html">accueil</a></li>
+                        <li><a href="peripheriques-accessoires.html">Périphériques & Accessoires</a></li>
+                        <li><a href="ordinateurs.html">ordinateur</a></li>
+                        <li><a href="contact.html">contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Suivez-nous</h4>
+                    <ul class="social-links">
+                        <li><a href="#"><i class="fab fa-facebook"></i> Facebook</a></li>
+                        <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
+                        <li><a href="#"><i class="fab fa-tiktok"></i> TikTok</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact</h4>
+                    <p><strong>Adresse:</strong> À configurer pour votre démonstration</p>
+                    <p><strong>Horaires :</strong> Du lundi au vendredi de 9h00 à 17h00</p>
+                    <p><strong>Téléphone:</strong> À configurer</p>
+                    <p><strong>Email:</strong> contact@example.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Set category filter for laptop accessories
+        window.categoryFilter = 'accessories';
+    </script>
+<script src="js/security.js"></script>
+<script src="js/products.js"></script>
+<script src="js/cart.js"></script>
+<script src="js/main.js"></script>
+<script src="js/shop.js"></script>
+<script src="js/product.js"></script>
+</body>
+</html>

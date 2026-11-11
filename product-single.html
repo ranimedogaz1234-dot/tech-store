@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Name - tech store</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/product.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha384-iw3OoTErCYJJB9mCa8LNS2hbsQ7M3C0EpIsO/H5+EGAkPGc6rk+V8i04oW/K5xq0" crossorigin="anonymous">
+</head>
+<body>
+    <!-- Header -->
+    <header class="main-header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <a href="index.html"><span class="tech">tech</span> <span class="store">store</span></a>
+                </div>
+                
+                <nav class="main-nav">
+                    <ul>
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="informatique.html">informatique</a></li>
+                        <li class="dropdown">
+                            <a href="ordinateurs.html">Ordinateurs <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="ordinateurs-bureau.html">Ordinateurs de Bureau</a></li>
+                                <li><a href="ordinateurs-portable.html">Ordinateurs portable</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="peripheriques-accessoires.html">Périphériques & Accessoires <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="peripherique-pc.html">Périphérique PC</a></li>
+                                <li><a href="accessoires-pc-portable.html">Accessoires PC Portable</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="contact.html">contact</a></li>
+                    </ul>
+                </nav>
+
+                <div class="header-icons">
+                    <a href="wishlist.html" class="icon-link"><i class="far fa-heart"></i><span class="badge">2</span></a>
+                    <a href="#" class="icon-link search-icon"><i class="fas fa-search"></i></a>
+                    <a href="login.html" class="icon-link"><i class="far fa-user"></i></a>
+                    <a href="cart.html" class="icon-link"><i class="fas fa-shopping-cart"></i><span class="badge">0</span></a>
+                </div>
+                <div class="mobile-menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Breadcrumb -->
+    <section class="product-breadcrumb">
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="index.html">Home</a> / 
+                <a href="informatique.html">informatique</a> / 
+                <a href="#" id="categoryLink"></a> / 
+                <span id="productName"></span>
+            </div>
+            <div class="product-navigation">
+                <a href="#" class="nav-btn" id="prevProduct"><i class="fas fa-arrow-left"></i> PREVIOUS</a>
+                <a href="#" class="nav-btn" id="nextProduct">NEXT <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Product Details -->
+    <section class="product-details-section">
+        <div class="container">
+            <div class="product-details-layout">
+                <!-- Product Gallery -->
+                <div class="product-gallery">
+                    <div class="main-image">
+                        <img src="" alt="Product" id="mainImage">
+                        <button class="zoom-btn"><i class="fas fa-expand"></i></button>
+                    </div>
+                    <div class="thumbnail-images">
+                        <div class="thumbnail active" data-index="0">
+                            <img src="" alt="Thumbnail">
+                        </div>
+                        <div class="thumbnail" data-index="1">
+                            <img src="" alt="Thumbnail">
+                        </div>
+                        <div class="thumbnail" data-index="2">
+                            <img src="" alt="Thumbnail">
+                        </div>
+                        <div class="thumbnail" data-index="3">
+                            <img src="" alt="Thumbnail">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Info -->
+                <div class="product-info">
+                    <h1 class="product-title" id="productTitle"></h1>
+                    
+                    <div class="product-price">
+                        <span class="current-price" id="currentPrice"></span>
+                        <span class="old-price" id="oldPrice"></span>
+                    </div>
+
+                    <!-- Color Selection (CIRCLES!) -->
+                    <div class="product-options" id="colorSection" style="display: none;">
+                        <h3>COULEUR</h3>
+                        <div class="color-options" id="colorOptions">
+                            <!-- Color circles will be added dynamically -->
+                        </div>
+                        <div class="selected-color" id="selectedColor"></div>
+                    </div>
+
+                    <!-- Quantity Selector -->
+                    <div class="quantity-section">
+                        <div class="quantity-selector">
+                            <button class="qty-btn" onclick="decreaseQty()">-</button>
+                            <input type="number" id="quantity" value="1" min="1">
+                            <button class="qty-btn" onclick="increaseQty()">+</button>
+                        </div>
+                        <button class="btn-add-to-basket" onclick="addToBasket()">ADD TO BASKET</button>
+                    </div>
+
+                    <!-- Wishlist Button -->
+                    <button class="btn-wishlist" onclick="addToWishlist()">
+                        <i class="far fa-heart"></i> Add to Wishlist
+                    </button>
+
+                    <!-- Product Meta -->
+                    <div class="product-meta">
+                        <p><strong>SKU:</strong> <span id="productSKU">N/A</span></p>
+                        <p><strong>Categories:</strong> <span id="productCategories"></span></p>
+                        <p><strong>Brand:</strong> <span id="productBrand"></span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Product Tabs -->
+    <section class="product-tabs-section">
+        <div class="container">
+            <div class="product-tabs">
+                <button class="tab-btn active" data-tab="description">Description</button>
+                <button class="tab-btn" data-tab="additional">Additional information</button>
+                <button class="tab-btn" data-tab="reviews">Reviews (0)</button>
+            </div>
+
+            <div class="tab-content active" id="description">
+                <div class="description-content" id="descriptionContent">
+                    <!-- Description will be loaded dynamically -->
+                </div>
+            </div>
+
+            <div class="tab-content" id="additional">
+                <table class="additional-info-table">
+                    <tbody id="additionalInfoTable">
+                        <!-- Additional info will be loaded dynamically -->
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="tab-content" id="reviews">
+                <div class="reviews-section">
+                    <p>There are no reviews yet.</p>
+                    <div class="add-review">
+                        <h3>Be the first to review this product</h3>
+                        <form class="review-form">
+                            <div class="rating-input">
+                                <label>Your rating *</label>
+                                <div class="stars">
+                                    <i class="far fa-star" data-rating="1"></i>
+                                    <i class="far fa-star" data-rating="2"></i>
+                                    <i class="far fa-star" data-rating="3"></i>
+                                    <i class="far fa-star" data-rating="4"></i>
+                                    <i class="far fa-star" data-rating="5"></i>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Your review *</label>
+                                <textarea rows="5" required></textarea>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Name *</label>
+                                    <input type="text" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Email *</label>
+                                    <input type="email" required>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn-submit">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Related Products -->
+    <section class="related-products-section">
+        <div class="container">
+            <h2 class="section-title">Related products</h2>
+            <div class="products-grid" id="relatedProducts">
+                <!-- Related products will be loaded dynamically -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <span class="tech">tech</span> <span class="store">store</span>
+                    </div>
+                    <p>Votre destination pour les ordinateurs, périphériques et accessoires au meilleur rapport qualité-prix.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Liens</h4>
+                    <ul>
+                        <li><a href="index.html">accueil</a></li>
+                        <li><a href="peripheriques-accessoires.html">Périphériques & Accessoires</a></li>
+                        <li><a href="ordinateurs.html">ordinateur</a></li>
+                        <li><a href="contact.html">contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Suivez-nous</h4>
+                    <ul class="social-links">
+                        <li><a href="#"><i class="fab fa-facebook"></i> Facebook</a></li>
+                        <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
+                        <li><a href="#"><i class="fab fa-tiktok"></i> TikTok</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact</h4>
+                    <p><strong>Adresse:</strong> À configurer pour votre démonstration</p>
+                    <p><strong>Horaires :</strong> Du lundi au vendredi de 9h00 à 17h00</p>
+                    <p><strong>Téléphone:</strong> À configurer</p>
+                    <p><strong>Email:</strong> contact@example.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+    <script src="js/security.js"></script>
+<script src="js/products.js"></script>
+<script src="js/cart.js"></script>
+<script src="js/main.js"></script>
+<script src="js/product.js"></script>
+<script src="js/shop.js"></script>
+</body>
+</html>

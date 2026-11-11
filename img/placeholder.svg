@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 240" role="img" aria-label="Product image unavailable">
+  <rect width="320" height="240" fill="#f3f4f6"/>
+  <rect x="84" y="48" width="152" height="144" rx="12" fill="#e5e7eb"/>
+  <path d="M124 97h72l10 70h-92z" fill="#9ca3af"/>
+  <path d="M141 97a19 19 0 0 1 38 0" fill="none" stroke="#6b7280" stroke-width="8"/>
+</svg>
