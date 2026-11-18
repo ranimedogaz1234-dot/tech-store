@@ -1,0 +1,75 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lint:
+    name: PHP syntax check
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          coverage: none
+      - name: php -l on every PHP file
+        run: git ls-files -z '*.php' | xargs -0 -n1 php -l
+
+  integration:
+    name: HTTP integration tests (PHP 8.4 + MySQL 8.4)
+    needs: lint
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    services:
+      mysql:
+        image: mysql:8.4
+        # Throwaway credentials for a disposable CI container. Not used anywhere else.
+        env:
+          MYSQL_ROOT_PASSWORD: ci-root-only
+          MYSQL_DATABASE: tech_store
+          MYSQL_USER: techstore_ci
+          MYSQL_PASSWORD: ci-app-only
+        ports: ['3306:3306']
+        options: >-
+          --health-cmd="mysqladmin ping -h 127.0.0.1 -pci-root-only"
+          --health-interval=5s --health-timeout=5s --health-retries=20
+    env:
+      TECHSTORE_DB_HOST: 127.0.0.1
+      TECHSTORE_DB_NAME: tech_store
+      TECHSTORE_DB_USER: techstore_ci
+      TECHSTORE_DB_PASS: ci-app-only
+      TECHSTORE_MAIL_ENABLED: '0'
+      TECHSTORE_TEST_URL: http://127.0.0.1:8000
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          extensions: pdo_mysql, curl
+          coverage: none
+      - name: Load schema and product catalog
+        run: |
+          mysql -h 127.0.0.1 -u root -pci-root-only tech_store < database.schema.sql
+          mysql -h 127.0.0.1 -u root -pci-root-only tech_store < database.catalog.sql
+      - name: Start the PHP development server
+        run: |
+          mkdir -p "$RUNNER_TEMP/sessions"
+          php -d "session.save_path=$RUNNER_TEMP/sessions" -S 127.0.0.1:8000 router.php > "$RUNNER_TEMP/server.log" 2>&1 &
+          for i in $(seq 1 20); do curl -fs http://127.0.0.1:8000/ > /dev/null && exit 0; sleep 0.5; done
+          cat "$RUNNER_TEMP/server.log"; exit 1
+      - name: Run integration tests
+        run: php tests/integration_test.php
+      - name: Server log
+        if: failure()
+        run: cat "$RUNNER_TEMP/server.log"
