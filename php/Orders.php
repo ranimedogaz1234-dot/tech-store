@@ -51,7 +51,8 @@ class Order {
                 $query = $this->db->prepare('SELECT id,name,price,image,stock FROM products WHERE id=? FOR UPDATE');
                 $query->execute([$id]);
                 $product = $query->fetch(PDO::FETCH_ASSOC);
-                if (!$product || $product['stock'] < $quantity) throw new InvalidArgumentException('Product unavailable');
+                // A product without a positive price (unpriced or placeholder catalog row) is not for sale.
+                if (!$product || $product['price'] <= 0 || $product['stock'] < $quantity) throw new InvalidArgumentException('Product unavailable');
                 $stock = $this->db->prepare('UPDATE products SET stock=stock-? WHERE id=? AND stock>=?');
                 $stock->execute([$quantity,$id,$quantity]);
                 if ($stock->rowCount() !== 1) throw new RuntimeException('Stock changed');
