@@ -134,7 +134,7 @@ check('product API returns the seeded catalog', function () use ($shopper, &$pro
     $products = $response['json'];
     expect(count($products) > 0, 'catalog is empty');
     foreach ($products as $product) {
-        expect(is_int($product['id']) && (is_int($product['price']) || is_float($product['price'])) && $product['price'] > 0, 'malformed product');
+        expect(is_int($product['id']) && (is_int($product['price']) || is_float($product['price'])) && $product['price'] >= 0, 'malformed product ' . json_encode($product));
     }
 });
 check('category filter only returns that category', function () use ($shopper) {
@@ -178,7 +178,7 @@ check('login succeeds with the right password', function () use ($shopper, $emai
 echo "Checkout (Cash on Delivery)\n";
 $orderNumber = null;
 check('order total and stock are computed on the server', function () use ($shopper, $db, $products, $shipping, &$orderNumber) {
-    $product = $products[0];
+    $product = array_values(array_filter($products, fn ($p) => $p['price'] > 0 && $p['stock'] >= 2))[0];
     $stock = fn () => (int) $db->query('SELECT stock FROM products WHERE id = ' . (int) $product['id'])->fetchColumn();
     $before = $stock();
     $token = $shopper->request('GET', '/php/checkout_token.php')['json']['checkoutToken'];
@@ -207,6 +207,18 @@ check('a quantity above the 100-per-line limit is refused', function () use ($sh
     $token = $shopper->request('GET', '/php/checkout_token.php')['json']['checkoutToken'];
     $response = placeOrder($shopper, $shipping, [['id' => $products[0]['id'], 'quantity' => 101, 'color' => '']], $token);
     expect(($response['json']['success'] ?? null) === false, 'invalid quantity accepted');
+});
+check('a product without a price cannot be ordered', function () use ($shopper, $db, $shipping) {
+    $db->exec("INSERT INTO products (name, price, category, brand, stock) VALUES ('Unpriced test item', 0.00, 'test', 'Test', 5)");
+    $id = (int) $db->lastInsertId();
+    try {
+        $token = $shopper->request('GET', '/php/checkout_token.php')['json']['checkoutToken'];
+        $response = placeOrder($shopper, $shipping, [['id' => $id, 'quantity' => 1, 'color' => '']], $token);
+        expect(($response['json']['success'] ?? null) === false, 'a 0.00 product was sold for shipping only');
+        expect((int) $db->query("SELECT stock FROM products WHERE id = $id")->fetchColumn() === 5, 'stock changed');
+    } finally {
+        $db->exec("DELETE FROM products WHERE id = $id");
+    }
 });
 check('a forged checkout token is refused', function () use ($shopper, $products, $shipping) {
     $response = placeOrder($shopper, $shipping, [['id' => $products[0]['id'], 'quantity' => 1, 'color' => '']], str_repeat('a', 64));
