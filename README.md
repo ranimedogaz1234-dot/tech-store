@@ -56,4 +56,13 @@ CSRF tokens protect form/API changes, session IDs regenerate on login, protected
 
 The checkout revision passed 40 HTTP/database checks and 17 checkout DOM-emulation checks. The existing 56 HTTP/security/path/JSON and 28 DOM checks were also rerun successfully, plus four fresh-schema checks. CLI administrator provisioning passed in the earlier review. The public demonstration coupon is DEMO20. DOM emulation does not verify a real browser's rendering, responsive layout or every pointer/keyboard interaction. Live mail and production deployment were not tested. Apache configuration was reviewed but not run; if using Apache 2.4, enable the supplied .htaccess rules and mod_rewrite. It fails closed without the rewrite module. Keep databases, test storage and private files outside public access.
 
+### Automated tests
+
+[`tests/integration_test.php`](tests/integration_test.php) drives the running application over HTTP against a disposable MySQL database. It covers router protection, the catalog API, CSRF on sign-up, password hashing, login, server-side order totals with a tampered client price, stock updates, idempotent checkout retries, COD-only payment, unpriced products, receipt access by another visitor, and login throttling. Every push and pull request runs it in [GitHub Actions](.github/workflows/ci.yml) with PHP 8.4 and MySQL 8.4, after a `php -l` check of every PHP file.
+
+```bash
+# with the server running and TECHSTORE_DB_* pointing at a throwaway database
+php tests/integration_test.php
+```
+
 See the [security review](PUBLIC_RELEASE_SECURITY_REPORT.md) for release scope and limitations and the [file inventory](COMMIT_FILES.txt) for the reviewed release contents.
