@@ -20,7 +20,7 @@ class Product {
 
     // Ajouter un produit
     public function addProduct($name, $description, $price, $old_price, $category, $subcategory, $brand, $sku, $stock, $image) {
-        if (!is_numeric($price) || $price < 0 || filter_var($stock, FILTER_VALIDATE_INT, ['options'=>['min_range'=>0]]) === false || trim($name) === '') {
+        if (!is_numeric($price) || $price <= 0 || filter_var($stock, FILTER_VALIDATE_INT, ['options'=>['min_range'=>0]]) === false || trim($name) === '') {
             return ['success'=>false,'message'=>'Informations produit invalides'];
         }
         $old_price = $old_price === '' ? null : $old_price;
@@ -64,6 +64,9 @@ class Product {
             foreach ($data as $key => $value) {
                 if (!in_array($key, ['name','description','price','old_price','category','subcategory','brand','sku','stock','image'], true)) {
                     throw new InvalidArgumentException('Invalid product field');
+                }
+                if ($key === 'price' && (!is_numeric($value) || $value <= 0)) {
+                    throw new InvalidArgumentException('Invalid product price');
                 }
                 $fields[] = "$key = ?";
                 $values[] = $value;
